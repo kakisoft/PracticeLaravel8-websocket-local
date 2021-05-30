@@ -32,6 +32,7 @@ composer require beyondcode/laravel-websockets
 ## migration 用のファイルを作成
 ```
 php artisan vendor:publish --provider="BeyondCode\LaravelWebSockets\WebSocketsServiceProvider" --tag="migrations"
+
 // -> database\migrations\0000_00_00_000000_create_websockets_statistics_entries_table.php  が作成される
 ```
 
@@ -57,6 +58,20 @@ DB_CONNECTION=sqlite
 database/database.sqlite  
 に空のファイルを作成しておく。  
 
+※migration が失敗した場合、php.ini の設定を確認。  
+#### 例：php7 - C:\tools\php74\php.ini
+```
+;extension=pdo_sqlite
+　　↓
+extension=pdo_sqlite
+```
+
+（以下は必須ではない？）
+```
+;extension=sqlite3
+　　↓
+extension=sqlite3
+```
 
 ______________________________________________
 ## migrate
@@ -69,4 +84,13 @@ php artisan migrate:fresh
 ```
 php artisan key:generate
 ```
+
+## WebSocket configuration file
+```
+php artisan vendor:publish --provider="BeyondCode\LaravelWebSockets\WebSocketsServiceProvider" --tag="config"
+
+//=> config\websockets.php が生成される
+```
+
+
 
