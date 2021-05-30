@@ -5,6 +5,9 @@ https://www.youtube.com/watch?v=pIGy7-7gGXI
 https://beyondco.de/docs/laravel-websockets/getting-started/installation
 
 _____________________________________________________________________________________
+※バックグラウンドで色々動かしている。VSCode を使用する場合、Terminal -> Split Terminal で、ターミナルを分割して実行すると良さげ。
+
+_____________________________________________________________________________________
 _____________________________________________________________________________________
 _____________________________________________________________________________________
 # 手順
@@ -91,6 +94,37 @@ php artisan vendor:publish --provider="BeyondCode\LaravelWebSockets\WebSocketsSe
 
 //=> config\websockets.php が生成される
 ```
+config\websockets.php  
+にて、以下のような設定が可。  
+・接続可能なホスト  
+・データサイズの上限  
+（詳細はファイルを参照）  
+
+## pusher 用の環境設定
+#### .env
+```
+PUSHER_APP_ID=
+PUSHER_APP_KEY=
+PUSHER_APP_SECRET=
+PUSHER_APP_CLUSTER=mt1
+
+　　　↓
+
+PUSHER_APP_ID=anyID
+PUSHER_APP_KEY=anyKEY
+PUSHER_APP_SECRET=anySECRET
+PUSHER_APP_CLUSTER=mt1
+```
+※何か適当な値を設定する
 
 
+## 実行
+```
+php artisan serve
+```
+
+
+
+
+laravel-websockets
 
