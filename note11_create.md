@@ -134,11 +134,56 @@ https://beyondco.de/docs/laravel-websockets/basic-usage/pusher
 ```
 composer require pusher/pusher-php-server "~3.0"
 ```
+
+その後、.env ファイルを編集
+```
+BROADCAST_DRIVER=log
+
+　　↓
+
+BROADCAST_DRIVER=pusher
+```
+
+
 ブロードキャストイベントを扱えるようになる
 
 
+## ブロードキャスト設定を編集
 
+#### broadcasting.php
+```php
+        'pusher' => [
+            'driver' => 'pusher',
+            'key' => env('PUSHER_APP_KEY'),
+            'secret' => env('PUSHER_APP_SECRET'),
+            'app_id' => env('PUSHER_APP_ID'),
+            'options' => [
+                'cluster' => env('PUSHER_APP_CLUSTER'),
+                'useTLS' => true,
+            ],
+        ],
+```
+　　　↓
+```php
+        'pusher' => [
+            'driver' => 'pusher',
+            'key' => env('PUSHER_APP_KEY'),
+            'secret' => env('PUSHER_APP_SECRET'),
+            'app_id' => env('PUSHER_APP_ID'),
+            'options' => [
+                'cluster' => env('PUSHER_APP_CLUSTER'),
+                'useTLS' => true,
+                'host' => '127.0.0.1',
+                'port' => 6001,
+                'scheme' => 'http'
+            ],
+        ],
+```
 
+## フロントから使用するためのライブラリを追加
+```
+npm install
+npm install laravel-echo pusher-js
+```
 
-laravel-websockets
 
