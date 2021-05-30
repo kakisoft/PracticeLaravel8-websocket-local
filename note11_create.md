@@ -123,6 +123,20 @@ PUSHER_APP_CLUSTER=mt1
 php artisan serve
 ```
 
+ダッシュボードにアクセス可。  
+（ 末尾の URL は、websockets.php の 'path' にて変更可 ）
+http://localhost:8000/laravel-websockets  
+
+
+## Pusher PHP SDK - install
+初期状態ではローカルからしかアクセスできないため、ライブラリを用意する。  
+https://beyondco.de/docs/laravel-websockets/basic-usage/pusher  
+```
+composer require pusher/pusher-php-server "~3.0"
+```
+ブロードキャストイベントを扱えるようになる
+
+
 
 
 
