@@ -124,7 +124,9 @@ php artisan serve
 ```
 
 ダッシュボードにアクセス可。  
-（ 末尾の URL は、websockets.php の 'path' にて変更可 ）
+（ 末尾の URL は、websockets.php の 'path' にて変更可 ）  
+※この時点では、ロクな操作ができない。  
+
 http://localhost:8000/laravel-websockets  
 
 
@@ -185,5 +187,69 @@ BROADCAST_DRIVER=pusher
 npm install
 npm install laravel-echo pusher-js
 ```
+
+## フロントから使用するための設定
+https://beyondco.de/docs/laravel-websockets/basic-usage/pusher#usage-with-laravel-echo  
+
+以下を追加
+#### resources\js\bootstrap.js
+```js
+import Echo from 'laravel-echo';
+
+window.Pusher = require('pusher-js');
+
+window.Echo = new Echo({
+    broadcaster: 'pusher',
+    key: process.env.MIX_PUSHER_APP_KEY,
+    cluster: process.env.MIX_PUSHER_APP_CLUSTER,
+    wsHost: window.location.hostname,
+    wsPort: 6001,
+    forceTLS: false,
+    disableStats: true,
+});
+```
+cluster, forceTLS, は場合によっては削除してよい？  
+あと、「forceTLS」は、環境（or バージョン）によっては、「encrypted」となっている？  
+
+
+## watch
+artisan serve を実行しているターミナルとは、別のターミナルで動作させるのがおすすめ。
+```
+npm run watch
+```
+
+
+## websocket サーバ起動
+別ターミナルを用意した方が動かしやすい。
+```
+php artisan websocket:serve
+```
+
+## ダッシュボード操作
+ダッシュボードの操作が可能となる。  
+
+http://localhost:8000/laravel-websockets  
+
+
+## イベント作成
+仮として、名称「WebSocketDemoEvent」で作成。
+```
+php artisan make:event WebSocketDemoEvent
+
+//=> app\Events\WebSocketDemoEvent.php が作成される
+```
+
+イベントを編集。  
+ - implements ShouldBroadcast を追加
+ - プライベート変数追加  
+ - コンストラクタ編集  
+ - broadcastOn メソッドを修正  
+
+参考ソース  
+
+
+
+
+
 
 
