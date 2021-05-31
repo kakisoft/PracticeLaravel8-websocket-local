@@ -246,7 +246,7 @@ php artisan make:event WebSocketDemoEvent
  - broadcastOn メソッドを修正  
 
 参考ソース  
-
+https://github.com/kakisoft/PracticeLaravel8-websocket-local/blob/main/laravel-websocket/app/Events/WebSocketDemoEvent.php
 
 以下を追加
 #### resources\js\bootstrap.js
