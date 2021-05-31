@@ -248,8 +248,41 @@ php artisan make:event WebSocketDemoEvent
 参考ソース  
 
 
+以下を追加
+#### resources\js\bootstrap.js
+```js
+window.Echo.channel('DemoChannel')
+.listen('WebsocketDemoEvent', (e)=> {
+    console.log(e)  // sample
+})
+```
 
+## js に記述した設定を読み込ませる
 
+例：  
+##### resources\views\welcome.blade.php
+```html
+<script src="js/app.js"></script>
+```
+csrf token も必要となる。
+```html
+<meta name="csrf-token" content="{{ csrf_token() }}">
+```
+以下は無くても行けたけど、付けておいた方がよい？
+```html
+    <body class="antialiased">
+        <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
 
+　　　　　↓
+
+    <body class="antialiased">
+        <div id="app" class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
+```
+
+## 別ウィンドウを開いて操作
+http://localhost:8000/  
+を複数立ち上げると、それぞれの画面のコンソールにメッセージが表示される。  
+
+ダッシュボードを使えば、チャンネルを指定してメッセージを一斉配信したり、特定のパラメータを渡して実行できる。  
 
 

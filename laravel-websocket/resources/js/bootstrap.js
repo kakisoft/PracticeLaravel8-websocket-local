@@ -34,3 +34,4 @@ window.Echo.channel('DemoChannel')
 .listen('WebsocketDemoEvent', (e)=> {
     console.log(e)
 })
+
